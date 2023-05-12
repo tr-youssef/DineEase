@@ -6,7 +6,10 @@
   "scripts": {
     "dev:client": "cd Client && npm run dev",
     "dev:server": "cd Server && npm run dev",
-    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\""
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "install:client": "cd Client && npm install",
+    "install:server": "cd Server && npm install",
+    "install": "concurrently \"npm run install:server\" \"npm run install:client\""
   },
   "author": "",
   "license": "ISC",
