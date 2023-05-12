@@ -9,7 +9,7 @@ import ServeDish from "../../assets/servingDish.png";
 import { useEffect, useState } from "react";
 import { callAPI } from "../../utils/FetchData";
 import { NotifContext } from "../../utils/Context.jsx";
-import { socket } from "../../utils/Socket.jsx";
+//import { socket } from "../../utils/Socket.jsx";
 import Logo from "../../assets/Logo2.png";
 
 function AppBar() {
@@ -17,11 +17,21 @@ function AppBar() {
   const avatar = "https://i.pravatar.cc/100";
   const name = auth?.firstName + " " + auth?.lastName;
   const role = auth?.role;
-  const { NumberOfNewClient, setNumberOfNewClient, NumberOfOrdersReady, setNumberOfOrdersReady } = useContext(NotifContext);
+  const {
+    NumberOfNewClient,
+    setNumberOfNewClient,
+    NumberOfOrdersReady,
+    setNumberOfOrdersReady,
+  } = useContext(NotifContext);
   const [ordersReady, setOrdersReady] = useState([]);
 
   useEffect(() => {
-    callAPI(`${import.meta.env.VITE__API_URL}/booked/availableTables`, "GET", "", auth.token).then((res) => {
+    callAPI(
+      `${import.meta.env.VITE__API_URL}/booked/availableTables`,
+      "GET",
+      "",
+      auth.token
+    ).then((res) => {
       const result = res.map((table) => ({
         ...table,
         key: table._id,
@@ -31,7 +41,12 @@ function AppBar() {
   }, []);
 
   useEffect(() => {
-    callAPI(`${import.meta.env.VITE__API_URL}/orders/orderReady`, "GET", "", auth.token).then((res) => {
+    callAPI(
+      `${import.meta.env.VITE__API_URL}/orders/orderReady`,
+      "GET",
+      "",
+      auth.token
+    ).then((res) => {
       const result = res.map((table) => ({
         ...table,
         key: table._id,
@@ -41,10 +56,15 @@ function AppBar() {
     });
   }, []);
 
-  useEffect(() => {
+  /*useEffect(() => {
     socket.connect();
     socket.on("ordersReady", (ordersReady) => {
-      callAPI(`${import.meta.env.VITE__API_URL}/orders/orderReady`, "GET", "", auth.token).then((res) => {
+      callAPI(
+        `${import.meta.env.VITE__API_URL}/orders/orderReady`,
+        "GET",
+        "",
+        auth.token
+      ).then((res) => {
         const result = res.map((table) => ({
           ...table,
           key: table._id,
@@ -56,16 +76,24 @@ function AppBar() {
     return () => {
       socket.disconnect();
     };
-  }, []);
+  }, []);*/
 
   function changeStatusToServed(order) {
     const statusOrder = {
       status: "Served",
     };
-    callAPI(`${import.meta.env.VITE__API_URL}/orders/status/${order._id}`, "PATCH", statusOrder, auth.token).then(() => {
-      setOrdersReady(ordersReady.filter((data) => order.bookedId._id !== data.bookedId._id));
+    callAPI(
+      `${import.meta.env.VITE__API_URL}/orders/status/${order._id}`,
+      "PATCH",
+      statusOrder,
+      auth.token
+    ).then(() => {
+      setOrdersReady(
+        ordersReady.filter((data) => order.bookedId._id !== data.bookedId._id)
+      );
     });
-    if (NumberOfOrdersReady > 0) setNumberOfOrdersReady(NumberOfOrdersReady - 1);
+    if (NumberOfOrdersReady > 0)
+      setNumberOfOrdersReady(NumberOfOrdersReady - 1);
   }
   function DataOfDishReadyToServer() {
     let items = [];
@@ -75,7 +103,12 @@ function AppBar() {
           key: order._id,
           onClick: () => changeStatusToServed(order),
           label: order.bookedId.tableId.nameOfTable,
-          icon: <CheckCircleTwoTone twoToneColor="#52c41a" className="CheckCircleTwoTone" />,
+          icon: (
+            <CheckCircleTwoTone
+              twoToneColor="#52c41a"
+              className="CheckCircleTwoTone"
+            />
+          ),
         });
       });
     return items;

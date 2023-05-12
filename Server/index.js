@@ -1,5 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
+import cors from "cors";
 import product from "./api/product.js";
 import usersRouter from "./api/routes/users.js";
 import categoriesRoutes from "./api/routes/categories.js";
@@ -13,6 +14,7 @@ import restaurantsRoutes from "./api/routes/restaurants.js";
 const app = express();
 
 app.use(express.json({ extended: false }));
+app.use(cors());
 app.use(express.static("public"));
 app.use("/api/product", product);
 app.use("/api/users", usersRouter);

@@ -24,11 +24,19 @@ const router = createBrowserRouter([
   { path: "/signin", element: <SignIn /> },
   {
     path: "/",
-    element: <RequireAuth children={<App />} isAllowed={"all"} />,
+    element: (
+      <RequireAuth isAllowed={"all"}>
+        <App />
+      </RequireAuth>
+    ),
     children: [
       {
         path: "manager",
-        element: <RequireAuth children={<Manager />} isAllowed={"manager"} />,
+        element: (
+          <RequireAuth isAllowed={"manager"}>
+            <Manager />
+          </RequireAuth>
+        ),
         children: [
           {
             path: "/manager/menu",
@@ -36,11 +44,15 @@ const router = createBrowserRouter([
           },
           {
             path: "/manager/menu/addcategory",
-            element: <RequireAuth children={<Category />} isAllowed={"manager"} />,
+            element: (
+              <RequireAuth children={<Category />} isAllowed={"manager"} />
+            ),
           },
           {
             path: "/manager/menu/editcategory/:id",
-            element: <RequireAuth children={<Category />} isAllowed={"manager"} />,
+            element: (
+              <RequireAuth children={<Category />} isAllowed={"manager"} />
+            ),
           },
           {
             path: "/manager/menu/additem/:id",
@@ -52,7 +64,9 @@ const router = createBrowserRouter([
           },
           {
             path: "/manager/tables",
-            element: <RequireAuth children={<Tables />} isAllowed={"manager"} />,
+            element: (
+              <RequireAuth children={<Tables />} isAllowed={"manager"} />
+            ),
           },
           {
             path: "/manager/tables/addTable",
@@ -102,7 +116,7 @@ const router = createBrowserRouter([
       },
       {
         path: "receiptPDF/:id",
-        element: <ReceiptPDF />
+        element: <ReceiptPDF />,
       },
       {
         path: "chef",
@@ -110,9 +124,10 @@ const router = createBrowserRouter([
       },
       {
         path: "receptionist",
-        element: <RequireAuth children={<Receptionist />} isAllowed={"receptionist"} />,
+        element: (
+          <RequireAuth children={<Receptionist />} isAllowed={"receptionist"} />
+        ),
       },
-
     ],
   },
 ]);

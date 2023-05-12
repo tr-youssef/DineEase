@@ -1,4 +1,3 @@
-import React from "react";
 import { Button, message, Form, Input } from "antd";
 import { useNavigate } from "react-router-dom";
 import { callAPI } from "../../utils/FetchData.jsx";
@@ -10,7 +9,11 @@ const SignIn = () => {
   const [messageApi, contextHolder] = message.useMessage();
 
   const onFinish = async (values) => {
-    const user = await callAPI(`${import.meta.env.VITE__API_URL}/users/signin`, "POST", values);
+    const user = await callAPI(
+      `${import.meta.env.VITE__API_URL}/users/signin`,
+      "POST",
+      values
+    );
     if (user.userId) {
       window.localStorage.setItem("user", JSON.stringify(user));
       navigate(`/${user.role}`);
@@ -28,12 +31,32 @@ const SignIn = () => {
   return (
     <div style={{ display: "flex" }}>
       {contextHolder}
-      <div style={{ flex: 1, overflow: "hidden", width: "100%", height: "99vh" }}>
+      <div
+        style={{ flex: 1, overflow: "hidden", width: "100%", height: "99vh" }}
+      >
         <img src={loginImage} style={{}}></img>
       </div>
       <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
-        <div style={{ flex: 1, display: "flex", justifyContent: "right", position: "relative", marginBottom: "200px" }}>
-          <img src={logoImage} style={{ objectFit: "contain", width: "20%", height: "20%%", top: 0, right: 50, position: "absolute" }}></img>
+        <div
+          style={{
+            flex: 1,
+            display: "flex",
+            justifyContent: "right",
+            position: "relative",
+            marginBottom: "200px",
+          }}
+        >
+          <img
+            src={logoImage}
+            style={{
+              objectFit: "contain",
+              width: "20%",
+              height: "20%%",
+              top: 0,
+              right: 50,
+              position: "absolute",
+            }}
+          ></img>
         </div>
         <div style={{ flex: 3 }}>
           <Form
@@ -86,7 +109,11 @@ const SignIn = () => {
                 span: 16,
               }}
             >
-              <Button style={{ backgroundColor: "#F36805", width: "100%" }} type="primary" htmlType="submit">
+              <Button
+                style={{ backgroundColor: "#F36805", width: "100%" }}
+                type="primary"
+                htmlType="submit"
+              >
                 Login
               </Button>
             </Form.Item>

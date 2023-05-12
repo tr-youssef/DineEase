@@ -1,3 +1,3 @@
-import { io } from "socket.io-client";
+/*import { io } from "socket.io-client";
 
-export const socket = io(import.meta.env.VITE__SOCKET_URL);
+export const socket = io(import.meta.env.VITE__SOCKET_URL);*/
