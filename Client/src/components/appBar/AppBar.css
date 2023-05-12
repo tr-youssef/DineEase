@@ -1,0 +1,37 @@
+.AppBar {
+  background-color: #f36805;
+  height: 60px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.Logo {
+  width: 80px;
+  height: 80px;
+  margin-left: 20px;
+}
+.Clock {
+  display: flex;
+  font-size: 150%;
+  align-items: center;
+}
+.ServeDishLogo {
+  width: 50px;
+  height: 50px;
+  margin-right: 30px;
+  margin-left: 20px;
+}
+.NotificationProfile {
+  display: flex;
+}
+.Notification {
+  display: flex;
+  align-items: center;
+}
+.NotificationItem {
+  margin-right: 20px;
+}
+.CheckCircleTwoTone {
+  font-size: 40;
+}

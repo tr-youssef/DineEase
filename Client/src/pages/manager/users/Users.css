@@ -1,0 +1,40 @@
+.Icons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.anticon-edit {
+  color: #f36805;
+}
+
+.anticon-check-circle {
+  color: green;
+}
+.anticon-close-circle {
+  color: red;
+}
+
+.employee-button {
+  background: #f36805;
+  color: #ffffff;
+  font-size: 16px;
+  margin-top: 60px;
+}
+
+.employeeButton {
+  float: right;
+  margin-top: -4vh;
+}
+.employeeTable {
+  margin-left: 157px;
+}
+.employess {
+  padding-top: 38px;
+  padding-left: 107px;
+  margin-top: 72px;
+  margin-left: 50px;
+}
+.ActiveInactive {
+  cursor: pointer;
+}

@@ -1,0 +1,32 @@
+.CollapseMenu {
+  margin-top: 72px;
+  margin-left: 50px;
+  width: 67vw;
+}
+.Collapse {
+  background-color: #f36805;
+}
+.Panel {
+  color: #ffffff;
+}
+.ant-collapse-expand-icon {
+  color: #ffffff;
+}
+.Header {
+  display: flex;
+  justify-content: space-between;
+  color: #ffffff;
+}
+.HeaderIcons {
+  display: flex;
+}
+.Icons {
+  margin-right: 20px;
+}
+.ItemsMenu {
+  display: flex;
+  flex-wrap: wrap;
+}
+.ItemMenu:hover {
+  cursor: pointer;
+}
