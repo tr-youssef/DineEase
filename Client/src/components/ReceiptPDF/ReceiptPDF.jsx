@@ -12,14 +12,31 @@ const ReceiptPDF = () => {
   const params = useParams();
   const bookedId = params.id;
   useEffect(() => {
-    callAPI(`${import.meta.env.VITE__API_URL}/orders/getOrder/${bookedId}`, "GET", "", user.token).then((res) => {
+    callAPI(
+      `${import.meta.env.VITE__API_URL}/api/orders/getOrder/${bookedId}`,
+      "GET",
+      "",
+      user.token
+    ).then((res) => {
       console.log("res", res);
       const pdf = BillReceipt({ order: res });
       setPDF(pdf);
     });
   }, []);
   if (pdf == null) return null;
-  return <PDFViewer style={{ width: "100%", height: "100vh", margin: 0, padding: 0, border: "none" }}>{pdf}</PDFViewer>;
+  return (
+    <PDFViewer
+      style={{
+        width: "100%",
+        height: "100vh",
+        margin: 0,
+        padding: 0,
+        border: "none",
+      }}
+    >
+      {pdf}
+    </PDFViewer>
+  );
 };
 
 export default ReceiptPDF;

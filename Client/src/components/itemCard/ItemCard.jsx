@@ -6,7 +6,11 @@ function ItemCard({ title, price, description, img }) {
   return (
     <div className="ItemCard">
       <div className="ItemCardImg">
-        <img src={`${import.meta.env.VITE__API_URL}/assets/${img}`} alt={img} className="ImgCard" />
+        <img
+          src={`${import.meta.env.VITE__API_URL}/${img}`}
+          alt={img}
+          className="ImgCard"
+        />
       </div>
       <Card
         style={{

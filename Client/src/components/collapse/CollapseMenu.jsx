@@ -14,7 +14,12 @@ function CollapseMenu({ booked, order, setOrder }) {
   const { Panel } = Collapse;
   useEffect(() => {
     let fetchData = async () => {
-      await callAPI(`${import.meta.env.VITE__API_URL}/categories`, "GET", "", token).then((res) => {
+      await callAPI(
+        `${import.meta.env.VITE__API_URL}/api/categories`,
+        "GET",
+        "",
+        token
+      ).then((res) => {
         if (!res.error) setCategories(res);
       });
     };
@@ -26,14 +31,27 @@ function CollapseMenu({ booked, order, setOrder }) {
   }
   function DeleteCategory(event, id) {
     event.stopPropagation();
-    callAPI(`${import.meta.env.VITE__API_URL}/categories/${id}`, "DELETE", {}, token).then((res) => {
-      if (res === "Category deleted") setCategories(categories.filter((category) => category._id !== id));
+    callAPI(
+      `${import.meta.env.VITE__API_URL}/api/categories/${id}`,
+      "DELETE",
+      {},
+      token
+    ).then((res) => {
+      if (res === "Category deleted")
+        setCategories(categories.filter((category) => category._id !== id));
     });
   }
   function onChange(key) {
     setItems([]);
     if (key.length !== 0) {
-      callAPI(`${import.meta.env.VITE__API_URL}/items/getitems/${categories[key]._id}`, "GET", {}, token).then((res) => {
+      callAPI(
+        `${import.meta.env.VITE__API_URL}/api/items/getitems/${
+          categories[key]._id
+        }`,
+        "GET",
+        {},
+        token
+      ).then((res) => {
         setItems(res);
       });
     }
@@ -41,7 +59,10 @@ function CollapseMenu({ booked, order, setOrder }) {
   function onClick(id, name, price) {
     const index = order.findIndex((x) => x.id === id);
     if (index === -1) {
-      const newOrder = [...order, { id: id, name: name, price: price, quantity: 1 }];
+      const newOrder = [
+        ...order,
+        { id: id, name: name, price: price, quantity: 1 },
+      ];
       setOrder(newOrder);
     } else {
       const newOrder = [...order];
@@ -62,10 +83,20 @@ function CollapseMenu({ booked, order, setOrder }) {
                     {!booked && (
                       <div className="HeaderIcons">
                         <div className="Icons">
-                          <EditFilled style={{ color: "#ffffff" }} onClick={(event) => EditCategory(event, categorie._id)} />
+                          <EditFilled
+                            style={{ color: "#ffffff" }}
+                            onClick={(event) =>
+                              EditCategory(event, categorie._id)
+                            }
+                          />
                         </div>
                         <div className="Icons">
-                          <DeleteFilled style={{ color: "#ffffff", marginLeft: "0px" }} onClick={(event) => DeleteCategory(event, categorie._id)} />
+                          <DeleteFilled
+                            style={{ color: "#ffffff", marginLeft: "0px" }}
+                            onClick={(event) =>
+                              DeleteCategory(event, categorie._id)
+                            }
+                          />
                         </div>
                       </div>
                     )}
@@ -84,11 +115,21 @@ function CollapseMenu({ booked, order, setOrder }) {
                         key={item._id}
                         className="ItemMenu"
                       >
-                        <ItemCard title={item.name} price={item.price} description={item.description} img={item.picture} />
+                        <ItemCard
+                          title={item.name}
+                          price={item.price}
+                          description={item.description}
+                          img={item.picture}
+                        />
                       </div>
                     ) : (
                       <Link to={`edititem/${item._id}`} key={item._id}>
-                        <ItemCard title={item.name} price={item.price} description={item.description} img={item.picture} />
+                        <ItemCard
+                          title={item.name}
+                          price={item.price}
+                          description={item.description}
+                          img={item.picture}
+                        />
                       </Link>
                     );
                   })}

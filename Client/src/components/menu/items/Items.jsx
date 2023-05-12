@@ -45,7 +45,12 @@ function Items() {
   useEffect(() => {
     if (location.pathname.split("/")[3] === "edititem") {
       let fetchData = async () => {
-        await callAPI(`${import.meta.env.VITE__API_URL}/items/${id.id}`, "GET", "", token).then((res) => {
+        await callAPI(
+          `${import.meta.env.VITE__API_URL}/api/items/${id.id}`,
+          "GET",
+          "",
+          token
+        ).then((res) => {
           setFields([
             {
               name: ["name"],
@@ -86,13 +91,35 @@ function Items() {
   }, [fields]);
   const onFinish = (values) => {
     if (location.pathname.split("/")[3] === "additem") {
-      const data = { name: values.name, price: values.price, description: values.description, categoryId: id.id, picture: values.upload[0].name };
-      callAPI(`${import.meta.env.VITE__API_URL}/items`, "POST", data, token).then(() => {
+      const data = {
+        name: values.name,
+        price: values.price,
+        description: values.description,
+        categoryId: id.id,
+        picture: values.upload[0].name,
+      };
+      callAPI(
+        `${import.meta.env.VITE__API_URL}/api/items`,
+        "POST",
+        data,
+        token
+      ).then(() => {
         navigate("/manager/menu");
       });
     } else {
-      const data = { name: values.name, price: values.price, description: values.description, categoryId: fields[4].value, picture: fileList[0].name };
-      callAPI(`${import.meta.env.VITE__API_URL}/items/${id.id}`, "PATCH", data, token).then(() => {
+      const data = {
+        name: values.name,
+        price: values.price,
+        description: values.description,
+        categoryId: fields[4].value,
+        picture: fileList[0].name,
+      };
+      callAPI(
+        `${import.meta.env.VITE__API_URL}/api/items/${id.id}`,
+        "PATCH",
+        data,
+        token
+      ).then(() => {
         navigate("/manager/menu");
       });
     }
@@ -106,19 +133,45 @@ function Items() {
     }
     setPreviewImage(file.url || file.preview);
     setPreviewOpen(true);
-    setPreviewTitle(file.name || file.url.substring(file.url.lastIndexOf("/") + 1));
+    setPreviewTitle(
+      file.name || file.url.substring(file.url.lastIndexOf("/") + 1)
+    );
   };
   const handleChange = ({ fileList: newFileList }) => setFileList(newFileList);
   const deleteItem = () => {
-    callAPI(`${import.meta.env.VITE__API_URL}/items/${id.id}`, "DELETE", {}, token).then(() => {
+    callAPI(
+      `${import.meta.env.VITE__API_URL}/api/items/${id.id}`,
+      "DELETE",
+      {},
+      token
+    ).then(() => {
       navigate("/manager/menu");
     });
   };
   return (
     <div className="Items">
-      <Button icon={<ArrowLeftOutlined />} onClick={handleClick} style={{ background: "#f36805", color: "#FFFFFF", fontSize: "16px", float: "Right", width: "100px" }} size={"large"} />
+      <Button
+        icon={<ArrowLeftOutlined />}
+        onClick={handleClick}
+        style={{
+          background: "#f36805",
+          color: "#FFFFFF",
+          fontSize: "16px",
+          float: "Right",
+          width: "100px",
+        }}
+        size={"large"}
+      />
       <div className="ItemsForm">
-        <Form name="addItem" fields={fields} style={{ maxWidth: 800, marginTop: "40px" }} initialValues={{ remember: true }} onFinish={onFinish} onFinishFailed={onFinishFailed} autoComplete="off">
+        <Form
+          name="addItem"
+          fields={fields}
+          style={{ maxWidth: 800, marginTop: "40px" }}
+          initialValues={{ remember: true }}
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+          autoComplete="off"
+        >
           <div className="ItemsInput">
             <div className="ItemsInputLine">
               <Form.Item
@@ -132,7 +185,10 @@ function Items() {
                   },
                 ]}
               >
-                <Input className="ItemInput" placeholder="Enter the name of the item" />
+                <Input
+                  className="ItemInput"
+                  placeholder="Enter the name of the item"
+                />
               </Form.Item>
               <Form.Item
                 label="Price of the item"
@@ -145,7 +201,10 @@ function Items() {
                   },
                 ]}
               >
-                <Input className="ItemInput" placeholder="Enter the name of the item" />
+                <Input
+                  className="ItemInput"
+                  placeholder="Enter the name of the item"
+                />
               </Form.Item>
             </div>
             <div className="ItemsInputLine">
@@ -160,22 +219,58 @@ function Items() {
                   },
                 ]}
               >
-                <TextArea className="ItemTextArea" placeholder="Enter the description of the item" />
+                <TextArea
+                  className="ItemTextArea"
+                  placeholder="Enter the description of the item"
+                />
               </Form.Item>
             </div>
             <div className="ItemsInputLine">
-              <Form.Item name="upload" label="Upload" getValueFromEvent={normFile}>
-                <Upload action={`${import.meta.env.VITE__API_URL}/upload/item`} listType="picture-card" fileList={fileList} onPreview={handlePreview} onChange={handleChange} maxCount={1}>
+              <Form.Item
+                name="upload"
+                label="Upload"
+                getValueFromEvent={normFile}
+              >
+                <Upload
+                  action={`${import.meta.env.VITE__API_URL}/api/upload/item`}
+                  listType="picture-card"
+                  fileList={fileList}
+                  onPreview={handlePreview}
+                  onChange={handleChange}
+                  maxCount={1}
+                >
                   {fileList.length >= 1 ? null : "Upload"}
                 </Upload>
               </Form.Item>
             </div>
           </div>
-          <Button style={{ background: "#f36805", color: "#FFFFFF", fontSize: "16px", float: "right", marginTop: "35px" }} size={"large"} htmlType="submit">
+          <Button
+            style={{
+              background: "#f36805",
+              color: "#FFFFFF",
+              fontSize: "16px",
+              float: "right",
+              marginTop: "35px",
+            }}
+            size={"large"}
+            htmlType="submit"
+          >
             {Object.keys(id).length === 0 ? "Create item" : "Save change"}
           </Button>
           {Object.keys(id).length !== 0 ? (
-            <Button style={{ background: "#FFFFFF", color: "#f36805", marginRight: "20px", borderColor: "#f36805", fontSize: "16px", float: "right", marginTop: "35px" }} size={"large"} onClick={deleteItem}>
+            <Button
+              style={{
+                background: "#FFFFFF",
+                color: "#f36805",
+                marginRight: "20px",
+                borderColor: "#f36805",
+                fontSize: "16px",
+                float: "right",
+                marginTop: "35px",
+              }}
+              size={"large"}
+              onClick={deleteItem}
+            >
               Delete item
             </Button>
           ) : (

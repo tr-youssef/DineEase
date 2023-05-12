@@ -15,9 +15,16 @@ function Tables() {
 
   function deleteTable(id) {
     const token = JSON.parse(localStorage.getItem("user")).token;
-    callAPI(`${import.meta.env.VITE__API_URL}/tables/${id}`, "DELETE", {}, token).then((res) => {
+    callAPI(
+      `${import.meta.env.VITE__API_URL}/api/tables/${id}`,
+      "DELETE",
+      {},
+      token
+    ).then((res) => {
       if (res === "Table deleted") {
-        const updatedDataSource = dataSource.filter((table) => table.key !== id);
+        const updatedDataSource = dataSource.filter(
+          (table) => table.key !== id
+        );
         setDataSource(updatedDataSource);
       }
     });
@@ -26,9 +33,19 @@ function Tables() {
   useEffect(() => {
     let fetchData = async () => {
       try {
-        const serverRes = await callAPI(`${import.meta.env.VITE__API_URL}/users?role=server`, "GET", "", token);
+        const serverRes = await callAPI(
+          `${import.meta.env.VITE__API_URL}/api/users?role=server`,
+          "GET",
+          "",
+          token
+        );
         setServers(serverRes);
-        const res = await callAPI(`${import.meta.env.VITE__API_URL}/tables`, "GET", "", token);
+        const res = await callAPI(
+          `${import.meta.env.VITE__API_URL}/api/tables`,
+          "GET",
+          "",
+          token
+        );
 
         const result = res.map((table) => ({
           ...table,
@@ -75,11 +92,17 @@ function Tables() {
         <div className="Icons">
           <div>
             <Link to={`editTable/${record._id}`}>
-              <EditFilled className="editIcon" onClick={() => EditTable(record._id)} />
+              <EditFilled
+                className="editIcon"
+                onClick={() => EditTable(record._id)}
+              />
             </Link>
           </div>
           <div>
-            <DeleteFilled className="deleteIcon" onClick={() => deleteTable(record._id)} />
+            <DeleteFilled
+              className="deleteIcon"
+              onClick={() => deleteTable(record._id)}
+            />
           </div>
         </div>
       ),
@@ -90,7 +113,11 @@ function Tables() {
     <div className="tables">
       <div className="tableButton">
         <Link to={"addTable"}>
-          <Button className="table-button" icon={<PlusCircleOutlined />} size={"large"}>
+          <Button
+            className="table-button"
+            icon={<PlusCircleOutlined />}
+            size={"large"}
+          >
             Add Table
           </Button>
         </Link>

@@ -33,7 +33,12 @@ const NewClientData = () => {
   ];
 
   useEffect(() => {
-    callAPI(`${import.meta.env.VITE__API_URL}/booked/availableTables`, "GET", "", user.token).then((res) => {
+    callAPI(
+      `${import.meta.env.VITE__API_URL}/api/booked/availableTables`,
+      "GET",
+      "",
+      user.token
+    ).then((res) => {
       const result = res.map((table) => ({
         ...table,
         key: table._id,

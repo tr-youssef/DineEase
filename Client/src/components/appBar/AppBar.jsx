@@ -27,7 +27,7 @@ function AppBar() {
 
   useEffect(() => {
     callAPI(
-      `${import.meta.env.VITE__API_URL}/booked/availableTables`,
+      `${import.meta.env.VITE__API_URL}/api/booked/availableTables`,
       "GET",
       "",
       auth.token
@@ -42,7 +42,7 @@ function AppBar() {
 
   useEffect(() => {
     callAPI(
-      `${import.meta.env.VITE__API_URL}/orders/orderReady`,
+      `${import.meta.env.VITE__API_URL}/api/orders/orderReady`,
       "GET",
       "",
       auth.token
@@ -60,7 +60,7 @@ function AppBar() {
     socket.connect();
     socket.on("ordersReady", (ordersReady) => {
       callAPI(
-        `${import.meta.env.VITE__API_URL}/orders/orderReady`,
+        `${import.meta.env.VITE__API_URL}/api/orders/orderReady`,
         "GET",
         "",
         auth.token
@@ -83,7 +83,7 @@ function AppBar() {
       status: "Served",
     };
     callAPI(
-      `${import.meta.env.VITE__API_URL}/orders/status/${order._id}`,
+      `${import.meta.env.VITE__API_URL}/api/orders/status/${order._id}`,
       "PATCH",
       statusOrder,
       auth.token

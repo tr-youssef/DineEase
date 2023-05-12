@@ -10,7 +10,7 @@ function Chef() {
   useEffect(() => {
     let fetchData = async () => {
       await callAPI(
-        `${import.meta.env.VITE__API_URL}/orders`,
+        `${import.meta.env.VITE__API_URL}/api/orders`,
         "GET",
         {},
         token
@@ -35,7 +35,7 @@ function Chef() {
   async function changeStatus(id) {
     const data = { status: "Ready" };
     await callAPI(
-      `${import.meta.env.VITE__API_URL}/orders/status/${id}`,
+      `${import.meta.env.VITE__API_URL}/api/orders/status/${id}`,
       "PATCH",
       data,
       token

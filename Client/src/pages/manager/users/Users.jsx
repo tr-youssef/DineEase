@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import { callAPI } from "../../../utils/FetchData.jsx";
 import { Link } from "react-router-dom";
-import { EditFilled, CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
+import {
+  EditFilled,
+  CheckCircleOutlined,
+  CloseCircleOutlined,
+} from "@ant-design/icons";
 import { Button, Popover } from "antd";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import AntTable from "../../../components/AntTable/AntTable.jsx";
@@ -14,7 +18,12 @@ function Users() {
 
   const employeeStatus = (id, token, status) => {
     if (id) {
-      callAPI(`${import.meta.env.VITE__API_URL}/users/status/${id}`, "PATCH", { active: status }, token)
+      callAPI(
+        `${import.meta.env.VITE__API_URL}/api/users/status/${id}`,
+        "PATCH",
+        { active: status },
+        token
+      )
         .then((data) => {
           const updatedDataSource = dataSource.map((employee) => {
             if (employee._id === id) {
@@ -33,10 +42,17 @@ function Users() {
 
   useEffect(() => {
     let fetchData = async () => {
-      await callAPI(`${import.meta.env.VITE__API_URL}/users`, "GET", "", token).then((res) => {
+      await callAPI(
+        `${import.meta.env.VITE__API_URL}/api/users`,
+        "GET",
+        "",
+        token
+      ).then((res) => {
         const result = [];
         res.map((x) => {
-          x.active ? result.push({ ...x, status: "active", key: x._id }) : result.push({ ...x, status: "inactive", key: x._id });
+          x.active
+            ? result.push({ ...x, status: "active", key: x._id })
+            : result.push({ ...x, status: "inactive", key: x._id });
         });
         setDataSource(result);
       });
@@ -87,8 +103,23 @@ function Users() {
             </Link>
           </div>
           <div>
-            <Popover className="ActiveInactive" title={record.active ? "Change employee to inactive " : "Change employee to active"}>
-              <div onClick={() => employeeStatus(record._id, token, record.active)}>{record.active ? <CheckCircleOutlined /> : <CloseCircleOutlined />}</div>
+            <Popover
+              className="ActiveInactive"
+              title={
+                record.active
+                  ? "Change employee to inactive "
+                  : "Change employee to active"
+              }
+            >
+              <div
+                onClick={() => employeeStatus(record._id, token, record.active)}
+              >
+                {record.active ? (
+                  <CheckCircleOutlined />
+                ) : (
+                  <CloseCircleOutlined />
+                )}
+              </div>
             </Popover>
           </div>
         </div>
@@ -100,7 +131,11 @@ function Users() {
     <div className="employees">
       <div className="employeeButton">
         <Link to={"addEmployee"}>
-          <Button className="employee-button" icon={<PlusCircleOutlined />} size={"large"}>
+          <Button
+            className="employee-button"
+            icon={<PlusCircleOutlined />}
+            size={"large"}
+          >
             Add Employee
           </Button>
         </Link>

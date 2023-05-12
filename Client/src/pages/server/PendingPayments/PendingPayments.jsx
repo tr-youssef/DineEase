@@ -27,7 +27,13 @@ const AlreadyOrderedData = () => {
       render: (_id, record) => {
         return (
           <Link to={"/receiptPDF/" + _id} target="_blank">
-            <img src={billiconimage} alt="Bill!" onClick={() => changeBookedStatus(record.bookedId, record.tableId, record._id)} />
+            <img
+              src={billiconimage}
+              alt="Bill!"
+              onClick={() =>
+                changeBookedStatus(record.bookedId, record.tableId, record._id)
+              }
+            />
           </Link>
         );
       },
@@ -35,7 +41,12 @@ const AlreadyOrderedData = () => {
   ];
 
   useEffect(() => {
-    callAPI(`${import.meta.env.VITE__API_URL}/orders/alreadyServed`, "GET", "", user.token).then((res) => {
+    callAPI(
+      `${import.meta.env.VITE__API_URL}/api/orders/alreadyServed`,
+      "GET",
+      "",
+      user.token
+    ).then((res) => {
       const result = res.map((table) => ({
         ...table,
         key: table._id,
@@ -48,14 +59,26 @@ const AlreadyOrderedData = () => {
     const statusBooked = {
       status: "Payed",
     };
-    callAPI(`${import.meta.env.VITE__API_URL}/booked/status/${bookedId}`, "PATCH", statusBooked, user.token).then(() => {
+    callAPI(
+      `${import.meta.env.VITE__API_URL}/api/booked/status/${bookedId}`,
+      "PATCH",
+      statusBooked,
+      user.token
+    ).then(() => {
       const statusTable = {
         status: "available",
       };
-      callAPI(`${import.meta.env.VITE__API_URL}/tables/status/${tableId}`, "PATCH", statusTable, user.token);
+      callAPI(
+        `${import.meta.env.VITE__API_URL}/api/tables/status/${tableId}`,
+        "PATCH",
+        statusTable,
+        user.token
+      );
     });
 
-    setAlreadyOrderedData(alreadyOrderedData.filter((data) => data.tableId !== tableId));
+    setAlreadyOrderedData(
+      alreadyOrderedData.filter((data) => data.tableId !== tableId)
+    );
   }
 
   return (

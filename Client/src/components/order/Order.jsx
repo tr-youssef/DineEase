@@ -28,14 +28,27 @@ function Order({ booked, order, setOrder }) {
       items: order,
       subTotalAmount: item,
       tax: Math.round((item * 0.05 + Number.EPSILON) * 100) / 100,
-      totalAmount: Math.round((item + item * 0.05 + Number.EPSILON) * 100) / 100,
+      totalAmount:
+        Math.round((item + item * 0.05 + Number.EPSILON) * 100) / 100,
       status: "New",
     };
-    callAPI(`${import.meta.env.VITE__API_URL}/orders`, "POST", data, user?.token).then(() => {
+    callAPI(
+      `${import.meta.env.VITE__API_URL}/api/orders`,
+      "POST",
+      data,
+      user?.token
+    ).then(() => {
       const statusTable = {
         status: "AlreadyOrdered",
       };
-      callAPI(`${import.meta.env.VITE__API_URL}/booked/bookedStatus/${booked._id}`, "PATCH", statusTable, user.token).then(() => {
+      callAPI(
+        `${import.meta.env.VITE__API_URL}/api/booked/bookedStatus/${
+          booked._id
+        }`,
+        "PATCH",
+        statusTable,
+        user.token
+      ).then(() => {
         navigate("/server");
       });
     });
@@ -49,7 +62,14 @@ function Order({ booked, order, setOrder }) {
         <div className="LineItem">
           {order &&
             order.map((item) => {
-              return <LineOrder item={item} order={order} setOrder={setOrder} key={item.id} />;
+              return (
+                <LineOrder
+                  item={item}
+                  order={order}
+                  setOrder={setOrder}
+                  key={item.id}
+                />
+              );
             })}
         </div>
       </div>
@@ -58,7 +78,16 @@ function Order({ booked, order, setOrder }) {
           <TotalPrice item={item} />
         </div>
         <div className="TakeOrderButton">
-          <Button style={{ color: "#F36805", backgroundColor: "#FFFFFF", width: "300px", margin: "40px 47px 56px 47px" }} type="primary" onClick={takeOrder}>
+          <Button
+            style={{
+              color: "#F36805",
+              backgroundColor: "#FFFFFF",
+              width: "300px",
+              margin: "40px 47px 56px 47px",
+            }}
+            type="primary"
+            onClick={takeOrder}
+          >
             Take Order
           </Button>
         </div>

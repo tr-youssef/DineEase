@@ -15,14 +15,24 @@ export function EditTable() {
   const [servers, setServers] = useState([]);
 
   useEffect(() => {
-    callAPI(`${import.meta.env.VITE__API_URL}/users?role=server`, "GET", "", token).then((res) => {
+    callAPI(
+      `${import.meta.env.VITE__API_URL}/api/users?role=server`,
+      "GET",
+      "",
+      token
+    ).then((res) => {
       setServers(res);
     });
   }, []);
 
   useEffect(() => {
     if (id) {
-      callAPI(`${import.meta.env.VITE__API_URL}/tables/getTable/${id}`, "GET", {}, token)
+      callAPI(
+        `${import.meta.env.VITE__API_URL}/api/tables/getTable/${id}`,
+        "GET",
+        {},
+        token
+      )
         .then((response) => {
           setFields([
             {
@@ -56,7 +66,12 @@ export function EditTable() {
     };
 
     if (id) {
-      callAPI(`${import.meta.env.VITE__API_URL}/tables/status/${id}`, "PATCH", data, token)
+      callAPI(
+        `${import.meta.env.VITE__API_URL}/api/tables/status/${id}`,
+        "PATCH",
+        data,
+        token
+      )
         .then((response) => {
           navigate("/manager/tables");
         })
@@ -74,8 +89,27 @@ export function EditTable() {
 
   return (
     <div className="AddTable">
-      <Button icon={<ArrowLeftOutlined />} onClick={handleClick} style={{ background: "#f36805", color: "#FFFFFF", fontSize: "16px", float: "left", width: "100px" }} size={"large"} />
-      <Form name="addEmployee" fields={fields} style={{ maxWidth: 600, marginTop: "40px" }} initialValues={{ remember: true }} onFinish={onFinish} onFinishFailed={onFinishFailed} autoComplete="off">
+      <Button
+        icon={<ArrowLeftOutlined />}
+        onClick={handleClick}
+        style={{
+          background: "#f36805",
+          color: "#FFFFFF",
+          fontSize: "16px",
+          float: "left",
+          width: "100px",
+        }}
+        size={"large"}
+      />
+      <Form
+        name="addEmployee"
+        fields={fields}
+        style={{ maxWidth: 600, marginTop: "40px" }}
+        initialValues={{ remember: true }}
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+        autoComplete="off"
+      >
         <Form.Item
           label="Name of table"
           name="nameOfTable"
@@ -121,7 +155,17 @@ export function EditTable() {
           </Select>
         </Form.Item>
         <Form.Item>
-          <Button style={{ background: "#f36805", color: "#FFFFFF", fontSize: "16px", float: "right", marginTop: "35px" }} size={"large"} htmlType="submit">
+          <Button
+            style={{
+              background: "#f36805",
+              color: "#FFFFFF",
+              fontSize: "16px",
+              float: "right",
+              marginTop: "35px",
+            }}
+            size={"large"}
+            htmlType="submit"
+          >
             Save Table
           </Button>
         </Form.Item>

@@ -18,7 +18,12 @@ function Category() {
   useEffect(() => {
     if (Object.keys(id).length !== 0) {
       let fetchData = async () => {
-        await callAPI(`${import.meta.env.VITE__API_URL}/categories/${id.id}`, "GET", "", token).then((res) => {
+        await callAPI(
+          `${import.meta.env.VITE__API_URL}/api/categories/${id.id}`,
+          "GET",
+          "",
+          token
+        ).then((res) => {
           setFields([
             {
               name: ["name"],
@@ -36,12 +41,22 @@ function Category() {
   const onFinish = (values) => {
     if (Object.keys(id).length === 0) {
       const data = { name: values.name };
-      callAPI(`${import.meta.env.VITE__API_URL}/categories`, "POST", data, token).then(() => {
+      callAPI(
+        `${import.meta.env.VITE__API_URL}/api/categories`,
+        "POST",
+        data,
+        token
+      ).then(() => {
         navigate("/manager/menu");
       });
     } else {
       const data = { name: values.name };
-      callAPI(`${import.meta.env.VITE__API_URL}/categories/${id.id}`, "PATCH", data, token).then(() => {
+      callAPI(
+        `${import.meta.env.VITE__API_URL}/api/categories/${id.id}`,
+        "PATCH",
+        data,
+        token
+      ).then(() => {
         navigate("/manager/menu");
       });
     }
@@ -51,9 +66,28 @@ function Category() {
   };
   return (
     <div className="Category">
-      <Button icon={<ArrowLeftOutlined />} onClick={handleClick} style={{ background: "#f36805", color: "#FFFFFF", fontSize: "16px", float: "Right", width: "100px" }} size={"large"} />
+      <Button
+        icon={<ArrowLeftOutlined />}
+        onClick={handleClick}
+        style={{
+          background: "#f36805",
+          color: "#FFFFFF",
+          fontSize: "16px",
+          float: "Right",
+          width: "100px",
+        }}
+        size={"large"}
+      />
       <div className="CategoryForm">
-        <Form name="addCategory" fields={fields} style={{ maxWidth: 600, marginTop: "40px" }} initialValues={{ remember: true }} onFinish={onFinish} onFinishFailed={onFinishFailed} autoComplete="off">
+        <Form
+          name="addCategory"
+          fields={fields}
+          style={{ maxWidth: 600, marginTop: "40px" }}
+          initialValues={{ remember: true }}
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+          autoComplete="off"
+        >
           <div>
             <Form.Item
               label="Name of the category"
@@ -66,10 +100,23 @@ function Category() {
                 },
               ]}
             >
-              <Input className="CategoryInput" placeholder="Enter the name of the category" />
+              <Input
+                className="CategoryInput"
+                placeholder="Enter the name of the category"
+              />
             </Form.Item>
           </div>
-          <Button style={{ background: "#f36805", color: "#FFFFFF", fontSize: "16px", float: "right", marginTop: "35px" }} size={"large"} htmlType="submit">
+          <Button
+            style={{
+              background: "#f36805",
+              color: "#FFFFFF",
+              fontSize: "16px",
+              float: "right",
+              marginTop: "35px",
+            }}
+            size={"large"}
+            htmlType="submit"
+          >
             {Object.keys(id).length === 0 ? "Create category" : "Save change"}
           </Button>
         </Form>

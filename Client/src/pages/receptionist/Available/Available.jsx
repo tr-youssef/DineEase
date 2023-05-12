@@ -10,7 +10,12 @@ function AvailableData() {
   useEffect(() => {
     let fetchData = async () => {
       try {
-        const res = await callAPI(`${import.meta.env.VITE__API_URL}/tables/availableTables/`, "GET", "", user.token);
+        const res = await callAPI(
+          `${import.meta.env.VITE__API_URL}/api/tables/availableTables/`,
+          "GET",
+          "",
+          user.token
+        );
         const result = res.map((table) => ({
           ...table,
           key: table._id,
@@ -28,11 +33,21 @@ function AvailableData() {
       tableId: tableId,
       status: "NewClient",
     };
-    callAPI(`${import.meta.env.VITE__API_URL}/booked/`, "POST", data, user.token).then(() => {
+    callAPI(
+      `${import.meta.env.VITE__API_URL}/api/booked/`,
+      "POST",
+      data,
+      user.token
+    ).then(() => {
       const statusTable = {
         status: "Filled",
       };
-      callAPI(`${import.meta.env.VITE__API_URL}/tables/status/${tableId}`, "PATCH", statusTable, user.token);
+      callAPI(
+        `${import.meta.env.VITE__API_URL}/api/tables/status/${tableId}`,
+        "PATCH",
+        statusTable,
+        user.token
+      );
     });
     setDataSource(dataSource.filter((data) => data._id !== tableId));
   }
