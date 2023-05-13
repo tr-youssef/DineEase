@@ -9,7 +9,7 @@ export const uploadItem = async (req, res) => {
     return () => randomFillSync(buf).toString("hex");
   })();
   bb.on("file", (name, file, info) => {
-    const saveTo = `/public/${info.filename}`; //path.join(os.tmpdir(), `busboy-upload-${random()}`);
+    const saveTo = `public/${info.filename}`; //path.join(os.tmpdir(), `busboy-upload-${random()}`);
     file.pipe(fs.createWriteStream(saveTo));
   });
   bb.on("close", () => {
