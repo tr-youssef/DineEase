@@ -21,5 +21,5 @@ export const uploadItem = async (req, res) => {
   });
   req.pipe(bb);
 
-  res.status(200).send("ok");
+  //res.status(200).send("ok");
 };
