@@ -3,6 +3,9 @@ import { randomFillSync } from "crypto";
 import fs from "fs";
 
 export const uploadItem = async (req, res) => {
+  if (req.method === "OPTIONS") {
+    return res.status(200).json({ body: "OK" });
+  }
   const bb = busboy({ headers: req.headers });
   const random = (() => {
     const buf = Buffer.alloc(16);
