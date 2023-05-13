@@ -17,9 +17,6 @@
       "dest": "public/$1"
     }
   ],
-  "github": {
-    "silent": true
-  },
   "headers": [
     {
       "source": "/api/(.*)",
