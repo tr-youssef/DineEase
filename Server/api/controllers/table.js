@@ -164,11 +164,14 @@ export const getFilledTables = async (req, res) => {
       leavedAt: 1,
       tableId: 1,
     });
+    console.log("bookedTables", bookedTables);
     let totalWaitTime = 0;
     let totalTables = 0;
     for (let table of bookedTables) {
-      const bookedAt = new Date(table.bookedAt);
-      const leavedAt = new Date(table.leavedAt);
+      const bookedAt =
+        new Date(table.bookedAt) - new Date().getTimezoneOffset();
+      const leavedAt =
+        new Date(table.leavedAt) - new Date().getTimezoneOffset();
       const waitTime = Math.round((leavedAt - bookedAt) / 1000);
       totalWaitTime += waitTime;
       totalTables++;
