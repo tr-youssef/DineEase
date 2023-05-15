@@ -41,7 +41,6 @@ function Order({ booked, order, setOrder }) {
       const statusTable = {
         status: "AlreadyOrdered",
       };
-      console.log("booked", booked);
       callAPI(
         `${import.meta.env.VITE__API_URL}/api/booked/bookedStatus/${
           bookedId.id
