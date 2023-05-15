@@ -93,8 +93,6 @@ function Items() {
         },
       ]);
   }, [fields]);
-  console.log("fields", fields);
-  console.log("fileList", fileList);
   const onFinish = (values) => {
     if (location.pathname.split("/")[3] === "additem") {
       const data = {
@@ -120,7 +118,7 @@ function Items() {
         description: values.description,
         categoryId: fields[4].value,
         picture: fileList[0].name,
-        url: fileList[0].response.url,
+        url: fileList[0].url,
       };
       callAPI(
         `${import.meta.env.VITE__API_URL}/api/items/${id.id}`,
