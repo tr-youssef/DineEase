@@ -4,7 +4,7 @@ import { callAPI } from "../../utils/FetchData.jsx";
 import loginImage from "../../assets/WebsiteImage.png";
 import logoImage from "../../assets/Logo1.png";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import "./Signin.css";
+import "./SignIn.css";
 
 const SignIn = () => {
   const navigate = useNavigate();
