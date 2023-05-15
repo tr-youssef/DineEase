@@ -18,7 +18,10 @@ function App() {
           NumberOfOrdersReady,
           setNumberOfOrdersReady,
         }}
-      ></NotifContext.Provider>
+      >
+        <AppBar />
+        <Outlet />
+      </NotifContext.Provider>
     </div>
   );
 }
