@@ -51,7 +51,6 @@ function Items() {
           "",
           token
         ).then((res) => {
-          console.log("res", res);
           setFields([
             {
               name: ["name"],

@@ -18,7 +18,6 @@ const ReceiptPDF = () => {
       "",
       user.token
     ).then((res) => {
-      console.log("res", res);
       const pdf = BillReceipt({ order: res });
       setPDF(pdf);
     });

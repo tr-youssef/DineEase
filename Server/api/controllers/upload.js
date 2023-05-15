@@ -15,7 +15,6 @@ const app = initializeApp(firebaseConfig);
 const storage = getStorage(app, process.env.GS_ID);
 
 export const uploadItem = async (req, res) => {
-  console.log("ttest");
   try {
     const itemsRef = ref(storage, req.file.originalname);
     const metadata = {
