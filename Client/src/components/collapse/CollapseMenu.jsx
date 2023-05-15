@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Collapse } from "antd";
 import { EditFilled, DeleteFilled } from "@ant-design/icons";
@@ -24,7 +24,7 @@ function CollapseMenu({ booked, order, setOrder }) {
       });
     };
     fetchData();
-  }, []);
+  });
   function EditCategory(event, id) {
     event.stopPropagation();
     navigate(`editcategory/${id}`);
@@ -119,7 +119,8 @@ function CollapseMenu({ booked, order, setOrder }) {
                           title={item.name}
                           price={item.price}
                           description={item.description}
-                          img={item.picture}
+                          img={item.img}
+                          url={item.url}
                         />
                       </div>
                     ) : (
@@ -129,6 +130,7 @@ function CollapseMenu({ booked, order, setOrder }) {
                           price={item.price}
                           description={item.description}
                           img={item.picture}
+                          url={item.url}
                         />
                       </Link>
                     );
@@ -136,7 +138,13 @@ function CollapseMenu({ booked, order, setOrder }) {
 
                   {!booked && (
                     <Link to={`additem/${categorie._id}`}>
-                      <ItemCard title={"Add new items"} img={"plus_sign.png"} />
+                      <ItemCard
+                        title={"Add new items"}
+                        img={"add new items"}
+                        url={
+                          "https://firebasestorage.googleapis.com/v0/b/dineease-backend.appspot.com/o/plus_sign.png?alt=media&token=71d63aca-6746-4a20-80e3-8a18efdcd5b6"
+                        }
+                      />
                     </Link>
                   )}
                 </div>

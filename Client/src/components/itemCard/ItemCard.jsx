@@ -1,16 +1,11 @@
-import React from "react";
 import { Card } from "antd";
 import "./ItemCard.css";
 
-function ItemCard({ title, price, description, img }) {
+function ItemCard({ title, price, description, img, url }) {
   return (
     <div className="ItemCard">
       <div className="ItemCardImg">
-        <img
-          src={`${import.meta.env.VITE__API_URL}/${img}`}
-          alt={img}
-          className="ImgCard"
-        />
+        <img src={url} alt={img} className="ImgCard" />
       </div>
       <Card
         style={{

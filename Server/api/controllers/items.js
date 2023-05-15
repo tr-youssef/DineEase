@@ -31,7 +31,9 @@ export const getItemById = async (req, res) => {
     const item = await Items.findOne({
       _id: id,
     });
-    item ? res.status(200).json(item) : res.status(404).send({ message: `No item with id: ${id}` });
+    item
+      ? res.status(200).json(item)
+      : res.status(404).send({ message: `No item with id: ${id}` });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -52,6 +54,7 @@ export const addItem = async (req, res) => {
       picture: newItem.picture,
       description: newItem.description,
       categoryId: newItem.categoryId,
+      url: newItem.url,
     });
     res.status(201).json(itemCreated);
   } catch (error) {
@@ -71,7 +74,9 @@ export const deleteItem = async (req, res) => {
     const itemDeleted = await Items.deleteOne({
       _id: id,
     });
-    itemDeleted.deletedCount > 0 ? res.status(200).json("Category deleted") : res.status(400).json("Category doesn't exist");
+    itemDeleted.deletedCount > 0
+      ? res.status(200).json("Category deleted")
+      : res.status(400).json("Category doesn't exist");
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -96,6 +101,7 @@ export const updateItem = async (req, res) => {
         price: newItem.price,
         picture: newItem.picture,
         description: newItem.description,
+        url: newItem.url,
       }
     );
     if (oldItem.matchedCount > 0) {

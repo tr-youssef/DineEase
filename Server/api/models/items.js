@@ -6,6 +6,9 @@ export const itemsSchema = new mongoose.Schema({
     allowNull: false,
     required: [true, "Name is required"],
   },
+  url: {
+    type: String,
+  },
   price: {
     type: Number,
     allowNull: false,

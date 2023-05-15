@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Input, Button, Form, Upload } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeftOutlined } from "@ant-design/icons";
@@ -9,6 +9,7 @@ function Items() {
   const navigate = useNavigate();
   const id = useParams();
   const token = JSON.parse(localStorage.getItem("user"))?.token;
+  const [fileList, setFileList] = useState([]);
   const [fields, setFields] = useState([
     {
       name: ["name"],
@@ -31,7 +32,6 @@ function Items() {
       value: "",
     },
   ]);
-  const [fileList, setFileList] = useState([]);
   const { TextArea } = Input;
   const handleClick = () => {
     navigate("/manager/menu");
@@ -72,12 +72,16 @@ function Items() {
               name: ["categoryId"],
               value: res.categoryId,
             },
+            {
+              name: ["url"],
+              value: res.url,
+            },
           ]);
         });
       };
       fetchData();
     }
-  }, []);
+  });
   useEffect(() => {
     fields[3].value &&
       setFileList([
@@ -97,6 +101,7 @@ function Items() {
         description: values.description,
         categoryId: id.id,
         picture: values.upload[0].name,
+        url: values.upload[0].response.url,
       };
       callAPI(
         `${import.meta.env.VITE__API_URL}/api/items`,
@@ -113,6 +118,7 @@ function Items() {
         description: values.description,
         categoryId: fields[4].value,
         picture: fileList[0].name,
+        url: values.upload[0].response.url,
       };
       callAPI(
         `${import.meta.env.VITE__API_URL}/api/items/${id.id}`,
@@ -128,14 +134,18 @@ function Items() {
     console.log("Failed:", errorInfo);
   };
   const handlePreview = async (file) => {
-    if (!file.url && !file.preview) {
-      file.preview = await getBase64(file.originFileObj);
+    let src = file.url;
+    if (!src) {
+      src = await new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file.originFileObj);
+        reader.onload = () => resolve(reader.result);
+      });
     }
-    setPreviewImage(file.url || file.preview);
-    setPreviewOpen(true);
-    setPreviewTitle(
-      file.name || file.url.substring(file.url.lastIndexOf("/") + 1)
-    );
+    const image = new Image();
+    image.src = src;
+    const imgWindow = window.open(src);
+    imgWindow?.document.write(image.outerHTML);
   };
   const handleChange = ({ fileList: newFileList }) => setFileList(newFileList);
   const deleteItem = () => {
@@ -238,6 +248,7 @@ function Items() {
                   onPreview={handlePreview}
                   onChange={handleChange}
                   maxCount={1}
+                  name="item"
                 >
                   {fileList.length >= 1 ? null : "Upload"}
                 </Upload>

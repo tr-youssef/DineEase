@@ -1,25 +1,31 @@
-import busboy from "busboy";
-import { randomFillSync } from "crypto";
-import fs from "fs";
+import { initializeApp } from "firebase/app";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+
+const firebaseConfig = {
+  apiKey: process.env.API_KEY,
+  authDomain: process.env.AUTH_DOMAIN,
+  projectId: process.env.PROJECT_ID,
+  storageBucket: process.env.STORAGE_BUCKET,
+  messagingSenderId: process.env.MESSAGING_SENDER_ID,
+  appId: process.env.APP_ID,
+  measurementId: process.env.MEASUREMENT_ID,
+};
+
+const app = initializeApp(firebaseConfig);
+const storage = getStorage(app, process.env.GS_ID);
 
 export const uploadItem = async (req, res) => {
-  if (req.method === "OPTIONS") {
-    return res.status(200).json({ body: "OK" });
-  }
-  const bb = busboy({ headers: req.headers });
-  const random = (() => {
-    const buf = Buffer.alloc(16);
-    return () => randomFillSync(buf).toString("hex");
-  })();
-  bb.on("file", (name, file, info) => {
-    const saveTo = `https://dineease-server.vercel.app/public/${info.filename}`; //path.join(os.tmpdir(), `busboy-upload-${random()}`);
-    file.pipe(fs.createWriteStream(saveTo));
-  });
-  bb.on("close", () => {
-    res.writeHead(200, { Connection: "close" });
-    res.end(`That's all folks!`);
-  });
-  req.pipe(bb);
+  console.log("ttest");
+  try {
+    const itemsRef = ref(storage, req.file.originalname);
+    const metadata = {
+      contentType: req.file.mimetype,
+    };
+    const snapshot = await uploadBytes(itemsRef, req.file.buffer, metadata);
 
-  //res.status(200).send("ok");
+    const downloadURL = await getDownloadURL(snapshot.ref);
+    res.status(200).json({ url: downloadURL });
+  } catch (error) {
+    console.log("error", error);
+  }
 };

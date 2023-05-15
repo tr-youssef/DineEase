@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import "./AppBar.css";
 import { ClockCircleTwoTone, CheckCircleTwoTone } from "@ant-design/icons";
 import { Badge, Avatar, Dropdown } from "antd";
@@ -26,35 +26,34 @@ function AppBar() {
   const [ordersReady, setOrdersReady] = useState([]);
 
   useEffect(() => {
-    callAPI(
-      `${import.meta.env.VITE__API_URL}/api/booked/availableTables`,
-      "GET",
-      "",
-      auth.token
-    ).then((res) => {
-      const result = res.map((table) => ({
-        ...table,
-        key: table._id,
-      }));
-      setNumberOfNewClient(result.length);
-    });
-  }, []);
-
-  useEffect(() => {
-    callAPI(
-      `${import.meta.env.VITE__API_URL}/api/orders/orderReady`,
-      "GET",
-      "",
-      auth.token
-    ).then((res) => {
-      const result = res.map((table) => ({
-        ...table,
-        key: table._id,
-      }));
-      setNumberOfOrdersReady(result.length);
-      setOrdersReady(result);
-    });
-  }, []);
+    if (auth.role === "server") {
+      callAPI(
+        `${import.meta.env.VITE__API_URL}/api/booked/availableTables`,
+        "GET",
+        "",
+        auth.token
+      ).then((res) => {
+        const result = res.map((table) => ({
+          ...table,
+          key: table._id,
+        }));
+        setNumberOfNewClient(result.length);
+      });
+      callAPI(
+        `${import.meta.env.VITE__API_URL}/api/orders/orderReady`,
+        "GET",
+        "",
+        auth.token
+      ).then((res) => {
+        const result = res.map((table) => ({
+          ...table,
+          key: table._id,
+        }));
+        setNumberOfOrdersReady(result.length);
+        setOrdersReady(result);
+      });
+    }
+  });
 
   /*useEffect(() => {
     socket.connect();
