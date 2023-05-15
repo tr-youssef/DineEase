@@ -1,5 +1,54 @@
-.Logo2.png {
-    width: 80px;
-    height: 80px;
-    margin-left: 20px;
+.Help {
+  background-color: rgba(243, 104, 5, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 20px;
+}
+
+.Container {
+  display: flex;
+}
+.Picture {
+  overflow: hidden;
+  height: 100vh;
+  width: 50%;
+}
+.Form {
+  height: 80%;
+  width: 70%;
+  margin: auto;
+}
+.RightContainer {
+  width: 50%;
+  height: 100vh;
+}
+.LogoSignin {
+  height: 30%;
+  width: 100%;
+  display: flex;
+  justify-content: right;
+}
+.ImgLogo {
+  margin-right: 20px;
+  width: 100px;
+  height: 100px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.login-form-forgot {
+  float: right;
+}
+.ant-col-rtl .login-form-forgot {
+  float: left;
+}
+.login-form-button {
+  width: 100%;
 }

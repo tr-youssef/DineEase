@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { callAPI } from "../../utils/FetchData.jsx";
 import loginImage from "../../assets/WebsiteImage.png";
 import logoImage from "../../assets/Logo1.png";
+import { LockOutlined, UserOutlined } from "@ant-design/icons";
+import "./Signin.css";
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -29,46 +31,40 @@ const SignIn = () => {
     console.log("Failed:", errorInfo);
   };
   return (
-    <div style={{ display: "flex" }}>
+    <div className="Container">
       {contextHolder}
-      <div
-        style={{ flex: 1, overflow: "hidden", width: "100%", height: "99vh" }}
-      >
-        <img src={loginImage} style={{}}></img>
+      <div className="Picture">
+        <img src={loginImage}></img>
       </div>
-      <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
-        <div
-          style={{
-            flex: 1,
-            display: "flex",
-            justifyContent: "right",
-            position: "relative",
-            marginBottom: "200px",
-          }}
-        >
-          <img
-            src={logoImage}
-            style={{
-              objectFit: "contain",
-              width: "20%",
-              height: "20%%",
-              top: 0,
-              right: 50,
-              position: "absolute",
-            }}
-          ></img>
+      <div className="RightContainer">
+        <div className="LogoSignin">
+          <img src={logoImage} className="ImgLogo" />
         </div>
-        <div style={{ flex: 3 }}>
+        <div className="Form">
+          <div className="Help">
+            <div>
+              For Manager : <b>manager@gmail.com</b>/ password : <b>manager</b>
+            </div>
+            <div>
+              For Receptionist : <b>receptionist@gmail.com</b> / password :
+              <b>receptionist</b>
+            </div>
+            <div>
+              For Server : <b>server@gmail.com</b> / password : <b>server</b>
+            </div>
+            <div>
+              For Chef : <b>chef@gmail.com</b> / password : <b>chef</b>
+            </div>
+          </div>
+
           <Form
             name="basic"
+            className="ContainerForm"
             labelCol={{
               span: 8,
             }}
             wrapperCol={{
-              span: 16,
-            }}
-            style={{
-              maxWidth: 600,
+              span: 36,
             }}
             initialValues={{
               remember: true,
@@ -78,7 +74,6 @@ const SignIn = () => {
             autoComplete="off"
           >
             <Form.Item
-              label="Email"
               name="email"
               rules={[
                 {
@@ -87,11 +82,12 @@ const SignIn = () => {
                 },
               ]}
             >
-              <Input placeholder="Enter your Email" />
+              <Input
+                prefix={<UserOutlined className="site-form-item-icon" />}
+                placeholder="Enter your Email"
+              />
             </Form.Item>
-
             <Form.Item
-              label="Password"
               name="password"
               rules={[
                 {
@@ -100,13 +96,16 @@ const SignIn = () => {
                 },
               ]}
             >
-              <Input.Password placeholder="Enter your password" />
+              <Input
+                prefix={<LockOutlined className="site-form-item-icon" />}
+                type="password"
+                placeholder="Enter your password"
+              />
             </Form.Item>
 
             <Form.Item
               wrapperCol={{
-                offset: 8,
-                span: 16,
+                span: 24,
               }}
             >
               <Button
