@@ -27,6 +27,7 @@ function Profil({ avatar, name, role }) {
   return (
     <Dropdown
       menu={menuProps}
+      className="Dropdown"
       // trigger={["click"]}
     >
       <div className="Profil">

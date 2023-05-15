@@ -27,8 +27,6 @@
   color: white;
 }
 
-.ant-dropdown-menu-item, a {
-  color: white !important;
+.ant-dropdown-menu-title-content {
+  color: white;
 }
-
-

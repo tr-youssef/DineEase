@@ -66,7 +66,7 @@ const AlreadyOrderedData = () => {
       user.token
     ).then(() => {
       const statusTable = {
-        status: "available",
+        status: "Available",
       };
       callAPI(
         `${import.meta.env.VITE__API_URL}/api/tables/status/${tableId}`,
