@@ -1,4 +1,3 @@
-import React from "react";
 import { Document, Page, Text, View, StyleSheet } from "@react-pdf/renderer";
 
 const styles = StyleSheet.create({
@@ -70,7 +69,9 @@ const BillReceipt = ({ order }) => (
       </View>
 
       <View style={styles.table}>
-        <Text style={styles.subtitle}>---------------------------------------------------------------------------------------------------------------------</Text>
+        <Text style={styles.subtitle}>
+          ---------------------------------------------------------------------------------------------------------------------
+        </Text>
         <View style={styles.row}>
           <Text style={styles.row1}>Subtotal Amount:</Text>
           <Text style={styles.row2}>{order.subTotalAmount}</Text>

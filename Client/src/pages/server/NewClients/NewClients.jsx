@@ -45,7 +45,7 @@ const NewClientData = () => {
       }));
       setAvailableData(result);
     });
-  }, []);
+  }, [user.token]);
   return (
     <div className="ClientsTable">
       <AntTable dataSource={availableData} Columns={Columns} />

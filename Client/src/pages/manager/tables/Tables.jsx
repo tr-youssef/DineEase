@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { callAPI } from "../../../utils/FetchData.jsx";
 import { Link } from "react-router-dom";
 import { EditFilled, DeleteFilled } from "@ant-design/icons";
-import { Button, Popover } from "antd";
+import { Button } from "antd";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import AntTable from "../../../components/AntTable/AntTable.jsx";
 import "./Tables.css";
@@ -58,7 +58,7 @@ function Tables() {
       }
     };
     fetchData();
-  }, []);
+  }, [token]);
 
   const Columns = [
     {

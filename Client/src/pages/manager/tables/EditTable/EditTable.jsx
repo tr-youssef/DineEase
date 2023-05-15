@@ -23,7 +23,7 @@ export function EditTable() {
     ).then((res) => {
       setServers(res);
     });
-  }, []);
+  }, [token]);
 
   useEffect(() => {
     if (id) {
@@ -55,7 +55,7 @@ export function EditTable() {
         })
         .catch((error) => console.log(error));
     }
-  }, [id]);
+  }, [id, token]);
 
   const onFinish = (values) => {
     const data = {
@@ -72,7 +72,7 @@ export function EditTable() {
         data,
         token
       )
-        .then((response) => {
+        .then(() => {
           navigate("/manager/tables");
         })
         .catch((error) => console.log(error));

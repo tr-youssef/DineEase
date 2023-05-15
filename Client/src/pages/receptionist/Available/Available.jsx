@@ -26,7 +26,7 @@ function AvailableData() {
       }
     };
     fetchData();
-  }, []);
+  }, [user.token]);
 
   function bookCustomer(tableId) {
     const data = {

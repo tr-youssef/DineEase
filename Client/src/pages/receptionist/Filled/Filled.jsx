@@ -25,7 +25,7 @@ function FilledData() {
       }
     };
     fetchData();
-  }, []);
+  }, [user.token]);
 
   const Columns = [
     {

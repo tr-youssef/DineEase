@@ -1,4 +1,3 @@
-import React from "react";
 import { Menu } from "antd";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./SideMenu.css";

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Input, Button, Form } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeftOutlined } from "@ant-design/icons";
@@ -34,7 +34,7 @@ function Category() {
       };
       fetchData();
     }
-  }, []);
+  }, [id, token]);
   const handleClick = () => {
     navigate("/manager/menu");
   };

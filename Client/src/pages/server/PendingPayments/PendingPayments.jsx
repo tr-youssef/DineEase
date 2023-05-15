@@ -53,9 +53,9 @@ const AlreadyOrderedData = () => {
       }));
       setAlreadyOrderedData(result);
     });
-  }, []);
+  }, [user.token]);
 
-  function changeBookedStatus(bookedId, tableId, _id) {
+  function changeBookedStatus(bookedId, tableId) {
     const statusBooked = {
       status: "Payed",
     };

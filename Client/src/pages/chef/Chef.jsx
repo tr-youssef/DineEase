@@ -19,7 +19,7 @@ function Chef() {
       });
     };
     fetchData();
-  }, []);
+  }, [token]);
 
   /*useEffect(() => {
     socket.connect();

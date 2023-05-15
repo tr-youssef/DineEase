@@ -1,4 +1,3 @@
-import React from "react";
 import { Outlet } from "react-router-dom";
 import SideMenu from "../../components/sideMenu/SideMenu.jsx";
 import { MailOutlined } from "@ant-design/icons";
@@ -14,7 +13,11 @@ function Manager() {
       type,
     };
   }
-  const menuItems = [getItem("Users", "users", <MailOutlined />), getItem("Menu", "menu", <MailOutlined />), getItem("Tables", "tables", <MailOutlined />)];
+  const menuItems = [
+    getItem("Users", "users", <MailOutlined />),
+    getItem("Menu", "menu", <MailOutlined />),
+    getItem("Tables", "tables", <MailOutlined />),
+  ];
   return (
     <div className="Manager">
       <SideMenu menuItems={menuItems} />

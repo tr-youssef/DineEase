@@ -24,7 +24,7 @@ function Users() {
         { active: status },
         token
       )
-        .then((data) => {
+        .then(() => {
           const updatedDataSource = dataSource.map((employee) => {
             if (employee._id === id) {
               return { ...employee, active: status };
@@ -58,7 +58,7 @@ function Users() {
       });
     };
     fetchData();
-  }, [dataSource]);
+  }, [dataSource, token]);
 
   const Columns = [
     {

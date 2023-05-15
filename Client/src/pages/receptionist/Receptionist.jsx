@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Tabs } from "antd";
 import AvailableData from "./Available/Available";
 import FilledData from "./Filled/Filled.jsx";
 import "./Receptionist.css";
 
 function Receptionist() {
-  const [activeTabKey, setActiveTabKey] = useState(localStorage.getItem("activeTabKey") || "1");
+  const [activeTabKey, setActiveTabKey] = useState(
+    localStorage.getItem("activeTabKey") || "1"
+  );
 
   const onTabChange = (key) => {
     setActiveTabKey(key);
@@ -35,7 +37,12 @@ function Receptionist() {
   return (
     <div className="Receptionist">
       <div>
-        <Tabs activeKey={activeTabKey} items={items} onChange={onTabChange} destroyInactiveTabPane={true} />
+        <Tabs
+          activeKey={activeTabKey}
+          items={items}
+          onChange={onTabChange}
+          destroyInactiveTabPane={true}
+        />
       </div>
     </div>
   );

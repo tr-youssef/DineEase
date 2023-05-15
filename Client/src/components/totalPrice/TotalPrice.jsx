@@ -1,4 +1,3 @@
-import React from "react";
 import "./TotalPrice.css";
 
 function TotalPrice({ item }) {
@@ -15,7 +14,9 @@ function TotalPrice({ item }) {
       <hr className="HR" />
       <div className="Line">
         <div>Total :</div>
-        <div>{Math.round((item + item * 0.05 + Number.EPSILON) * 100) / 100} CAD</div>
+        <div>
+          {Math.round((item + item * 0.05 + Number.EPSILON) * 100) / 100} CAD
+        </div>
       </div>
     </div>
   );

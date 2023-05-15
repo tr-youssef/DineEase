@@ -60,7 +60,7 @@ export function EditForm() {
         },
       ]);
     }
-  }, [id]);
+  }, [id, token]);
 
   const onFinish = (values) => {
     if (id) {
@@ -70,7 +70,7 @@ export function EditForm() {
         values,
         token
       )
-        .then((response) => {
+        .then(() => {
           navigate("/manager/users");
         })
         .catch((error) => console.log(error));

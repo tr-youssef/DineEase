@@ -1,6 +1,4 @@
-import React from "react";
 import { useEffect, useState } from "react";
-import ReactDOM from "react-dom";
 import { PDFViewer } from "@react-pdf/renderer";
 import BillReceipt from "../billReceipt/BillReceipt";
 import { callAPI } from "../../utils/FetchData";
@@ -21,7 +19,7 @@ const ReceiptPDF = () => {
       const pdf = BillReceipt({ order: res });
       setPDF(pdf);
     });
-  }, []);
+  }, [bookedId, user.token]);
   if (pdf == null) return null;
   return (
     <PDFViewer
