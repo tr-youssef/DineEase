@@ -51,6 +51,7 @@ function Items() {
           "",
           token
         ).then((res) => {
+          console.log("res", res);
           setFields([
             {
               name: ["name"],
@@ -81,7 +82,7 @@ function Items() {
       };
       fetchData();
     }
-  });
+  }, [id.id, token]);
   useEffect(() => {
     fields[3].value &&
       setFileList([
@@ -89,7 +90,7 @@ function Items() {
           uid: "-1",
           name: fields[3].value,
           status: "done",
-          url: `${import.meta.env.VITE__API_URL}/assets/${fields[3].value}`,
+          url: fields[5].value,
         },
       ]);
   }, [fields]);

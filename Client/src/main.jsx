@@ -40,32 +40,50 @@ const router = createBrowserRouter([
         children: [
           {
             path: "/manager/menu",
-            element: <RequireAuth children={<Menu />} isAllowed={"manager"} />,
+            element: (
+              <RequireAuth isAllowed={"manager"}>
+                <Menu />
+              </RequireAuth>
+            ),
           },
           {
             path: "/manager/menu/addcategory",
             element: (
-              <RequireAuth children={<Category />} isAllowed={"manager"} />
+              <RequireAuth isAllowed={"manager"}>
+                <Category />
+              </RequireAuth>
             ),
           },
           {
             path: "/manager/menu/editcategory/:id",
             element: (
-              <RequireAuth children={<Category />} isAllowed={"manager"} />
+              <RequireAuth isAllowed={"manager"}>
+                <Category />
+              </RequireAuth>
             ),
           },
           {
             path: "/manager/menu/additem/:id",
-            element: <RequireAuth children={<Items />} isAllowed={"manager"} />,
+            element: (
+              <RequireAuth isAllowed={"manager"}>
+                <Items />
+              </RequireAuth>
+            ),
           },
           {
             path: "/manager/menu/edititem/:id",
-            element: <RequireAuth children={<Items />} isAllowed={"manager"} />,
+            element: (
+              <RequireAuth isAllowed={"manager"}>
+                <Items />
+              </RequireAuth>
+            ),
           },
           {
             path: "/manager/tables",
             element: (
-              <RequireAuth children={<Tables />} isAllowed={"manager"} />
+              <RequireAuth isAllowed={"manager"}>
+                <Tables />
+              </RequireAuth>
             ),
           },
           {
@@ -86,7 +104,11 @@ const router = createBrowserRouter([
           },
           {
             path: "/manager/users",
-            element: <RequireAuth children={<Users />} isAllowed={"manager"} />,
+            element: (
+              <RequireAuth isAllowed={"manager"}>
+                <Users />
+              </RequireAuth>
+            ),
           },
           {
             path: "/manager/users/addEmployee",
@@ -108,11 +130,19 @@ const router = createBrowserRouter([
       },
       {
         path: "server",
-        element: <RequireAuth children={<Server />} isAllowed={"server"} />,
+        element: (
+          <RequireAuth isAllowed={"server"}>
+            <Server />
+          </RequireAuth>
+        ),
       },
       {
         path: "server/takeorder/:id",
-        element: <RequireAuth children={<TakeOrder />} isAllowed={"server"} />,
+        element: (
+          <RequireAuth isAllowed={"server"}>
+            <TakeOrder />
+          </RequireAuth>
+        ),
       },
       {
         path: "receiptPDF/:id",
@@ -120,12 +150,18 @@ const router = createBrowserRouter([
       },
       {
         path: "chef",
-        element: <RequireAuth children={<Chef />} isAllowed={"chef"} />,
+        element: (
+          <RequireAuth isAllowed={"chef"}>
+            <Chef />
+          </RequireAuth>
+        ),
       },
       {
         path: "receptionist",
         element: (
-          <RequireAuth children={<Receptionist />} isAllowed={"receptionist"} />
+          <RequireAuth isAllowed={"receptionist"}>
+            <Receptionist />
+          </RequireAuth>
         ),
       },
     ],
