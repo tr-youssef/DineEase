@@ -114,10 +114,6 @@ function Items() {
         navigate("/manager/menu");
       });
     } else {
-      console.log("values", values);
-      console.log("fields[4]", fields[4]);
-      console.log("fileList[0]", fileList[0]);
-      console.log("values.upload[0]", values.upload[0]);
       const data = {
         name: values.name,
         price: values.price,
