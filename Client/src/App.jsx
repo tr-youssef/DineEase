@@ -11,9 +11,15 @@ function App() {
   inject();
   return (
     <div className="App">
-      <NotifContext.Provider value={{ NumberOfNewClient, setNumberOfNewClient, NumberOfOrdersReady, setNumberOfOrdersReady }}>
+      <NotifContext.Provider
+        value={{
+          NumberOfNewClient,
+          setNumberOfNewClient,
+          NumberOfOrdersReady,
+          setNumberOfOrdersReady,
+        }}
+      >
         <AppBar />
-        <Outlet />
       </NotifContext.Provider>
     </div>
   );
