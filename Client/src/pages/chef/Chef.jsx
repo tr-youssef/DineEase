@@ -39,7 +39,9 @@ function Chef() {
       "PATCH",
       data,
       token
-    ).then(() => {});
+    ).then(() => {
+      setOrders(orders.filter((data) => id !== data._id));
+    });
   }
 
   return (
