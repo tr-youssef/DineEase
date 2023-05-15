@@ -125,7 +125,6 @@ export const getAvailableTables = async (req, res) => {
     let tables = await Table.find({ status: "Available" })
       .populate({ path: "userId" })
       .populate({ path: "restaurantId" });
-    console.log("tables", tables);
     const filteredTables = tables.filter(
       (table) =>
         table.restaurantId._id.toString() === req.restaurantId &&
@@ -152,61 +151,26 @@ export const getFilledTables = async (req, res) => {
     let tables = await Booked.find({
       $or: [{ status: "NewClient" }, { status: "AlreadyOrdered" }],
     })
-      .select({ _id: 1, bookedAt: 1 })
+      .select({ _id: 1, bookedAt: 1, status: 1 })
       .populate({
         path: "tableId",
         select: { restaurantId: 1, nameOfTable: 1, capacity: 1 },
         populate: { path: "userId", select: { userId: 1 } },
       });
+    const averageWaitTime = 2700;
 
-    const bookedTables = await Booked.find({ status: "Payed" }).select({
-      bookedAt: 1,
-      leavedAt: 1,
-      tableId: 1,
-    });
-    console.log("bookedTables", bookedTables);
-    let totalWaitTime = 0;
-    let totalTables = 0;
-    for (let table of bookedTables) {
-      const bookedAt =
-        new Date(table.bookedAt) - new Date().getTimezoneOffset();
-      const leavedAt =
-        new Date(table.leavedAt) - new Date().getTimezoneOffset();
-      const waitTime = Math.round((leavedAt - bookedAt) / 1000);
-      totalWaitTime += waitTime;
-      totalTables++;
-    }
-    const averageWaitTime = Math.round(totalWaitTime / totalTables);
+    const formattedTables = tables.map((table) => ({
+      _id: table._id,
+      nameOfTable: table.tableId.nameOfTable,
+      capacity: table.tableId.capacity,
+      bookedAt: table.bookedAt.getTime(),
+      waitingTime: (new Date() - table.bookedAt) / 1000 - averageWaitTime,
+    }));
 
-    const formattedTables = tables.map(async (table) => {
-      const bookedAt = new Date(table.bookedAt);
-      const formattedTime = bookedAt.toLocaleTimeString("en-US", {
-        hour: "numeric",
-        minute: "numeric",
-        hour12: true,
-      });
-      const waitingTimeInSeconds = bookedAt.getTime() + averageWaitTime * 1000;
-      const waitingTime = new Date(waitingTimeInSeconds);
-      const waitingTimeText = waitingTime.toLocaleTimeString("en-US", {
-        hour: "numeric",
-        minute: "numeric",
-        hour12: true,
-      });
-      return {
-        _id: table._id,
-        nameOfTable: table.tableId.nameOfTable,
-        capacity: table.tableId.capacity,
-        bookedAt: `${formattedTime}`,
-        waitingTime: waitingTimeText,
-      };
-    });
-
-    const formattedTablesData = await Promise.all(formattedTables);
-
-    if (!formattedTablesData) {
+    if (!formattedTables) {
       res.status(404).send({ message: `No table found.` });
     } else {
-      res.status(200).json(formattedTablesData);
+      res.status(200).json(formattedTables);
     }
   } catch (error) {
     res.status(500).json({ error: error.message });

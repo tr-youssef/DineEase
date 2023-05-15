@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { callAPI } from "../../../utils/FetchData.jsx";
 import AntTable from "../../../components/AntTable/AntTable.jsx";
+import { Time } from "../../../utils/SecondsToMs.jsx";
 
 function FilledData() {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -18,6 +19,14 @@ function FilledData() {
         const result = res.map((table) => ({
           ...table,
           key: table._id,
+          waitingTime: Time(table.waitingTime),
+          bookedAt: new Date(
+            table.bookedAt - new Date().getTimezoneOffset()
+          ).toLocaleTimeString("en-US", {
+            hour: "numeric",
+            minute: "numeric",
+            hour12: true,
+          }),
         }));
         setDataSource(result);
       } catch (error) {
