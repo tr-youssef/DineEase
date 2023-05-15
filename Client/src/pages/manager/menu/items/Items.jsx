@@ -93,6 +93,8 @@ function Items() {
         },
       ]);
   }, [fields]);
+  console.log("fields", fields);
+  console.log("fileList", fileList);
   const onFinish = (values) => {
     if (location.pathname.split("/")[3] === "additem") {
       const data = {
@@ -112,13 +114,17 @@ function Items() {
         navigate("/manager/menu");
       });
     } else {
+      console.log("values", values);
+      console.log("fields[4]", fields[4]);
+      console.log("fileList[0]", fileList[0]);
+      console.log("values.upload[0]", values.upload[0]);
       const data = {
         name: values.name,
         price: values.price,
         description: values.description,
         categoryId: fields[4].value,
         picture: fileList[0].name,
-        url: values.upload[0].response.url,
+        url: fileList[0].response.url,
       };
       callAPI(
         `${import.meta.env.VITE__API_URL}/api/items/${id.id}`,
