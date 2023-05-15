@@ -27,6 +27,142 @@ const router = createBrowserRouter([
         <App />
       </RequireAuth>
     ),
+    children: [
+      {
+        path: "manager",
+        element: (
+          <RequireAuth isAllowed={"manager"}>
+            <Manager />
+          </RequireAuth>
+        ),
+        children: [
+          {
+            path: "/manager/menu",
+            element: (
+              <RequireAuth isAllowed={"manager"}>
+                <Menu />
+              </RequireAuth>
+            ),
+          },
+          {
+            path: "/manager/menu/addcategory",
+            element: (
+              <RequireAuth isAllowed={"manager"}>
+                <Category />
+              </RequireAuth>
+            ),
+          },
+          {
+            path: "/manager/menu/editcategory/:id",
+            element: (
+              <RequireAuth isAllowed={"manager"}>
+                <Category />
+              </RequireAuth>
+            ),
+          },
+          {
+            path: "/manager/menu/additem/:id",
+            element: (
+              <RequireAuth isAllowed={"manager"}>
+                <Items />
+              </RequireAuth>
+            ),
+          },
+          {
+            path: "/manager/menu/edititem/:id",
+            element: (
+              <RequireAuth isAllowed={"manager"}>
+                <Items />
+              </RequireAuth>
+            ),
+          },
+          {
+            path: "/manager/tables",
+            element: (
+              <RequireAuth isAllowed={"manager"}>
+                <Tables />
+              </RequireAuth>
+            ),
+          },
+          {
+            path: "/manager/tables/addTable",
+            element: (
+              <RequireAuth isAllowed={"manager"}>
+                <AddTable />
+              </RequireAuth>
+            ),
+          },
+          {
+            path: "/manager/tables/editTable/:id",
+            element: (
+              <RequireAuth isAllowed={"manager"}>
+                <EditTable />
+              </RequireAuth>
+            ),
+          },
+          {
+            path: "/manager/users",
+            element: (
+              <RequireAuth isAllowed={"manager"}>
+                <Users />
+              </RequireAuth>
+            ),
+          },
+          {
+            path: "/manager/users/addEmployee",
+            element: (
+              <RequireAuth isAllowed={"manager"}>
+                <AddForm />
+              </RequireAuth>
+            ),
+          },
+          {
+            path: "/manager/users/editEmployee/:id",
+            element: (
+              <RequireAuth isAllowed={"manager"}>
+                <EditForm />
+              </RequireAuth>
+            ),
+          },
+        ],
+      },
+      {
+        path: "server",
+        element: (
+          <RequireAuth isAllowed={"server"}>
+            <Server />
+          </RequireAuth>
+        ),
+      },
+      {
+        path: "server/takeorder/:id",
+        element: (
+          <RequireAuth isAllowed={"server"}>
+            <TakeOrder />
+          </RequireAuth>
+        ),
+      },
+      {
+        path: "receiptPDF/:id",
+        element: <ReceiptPDF />,
+      },
+      {
+        path: "chef",
+        element: (
+          <RequireAuth isAllowed={"chef"}>
+            <Chef />
+          </RequireAuth>
+        ),
+      },
+      {
+        path: "receptionist",
+        element: (
+          <RequireAuth isAllowed={"receptionist"}>
+            <Receptionist />
+          </RequireAuth>
+        ),
+      },
+    ],
   },
 ]);
 export default router;
