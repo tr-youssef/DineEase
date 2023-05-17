@@ -113,7 +113,7 @@ const SignIn = () => {
                 type="primary"
                 htmlType="submit"
               >
-                Login
+                Sign In
               </Button>
             </Form.Item>
           </Form>

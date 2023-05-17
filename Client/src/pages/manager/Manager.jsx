@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import SideMenu from "../../components/sideMenu/SideMenu.jsx";
-import { MailOutlined } from "@ant-design/icons";
+import { BoxPlotOutlined, UserOutlined, BookOutlined } from "@ant-design/icons";
 import "./Manager.css";
 
 function Manager() {
@@ -14,9 +14,9 @@ function Manager() {
     };
   }
   const menuItems = [
-    getItem("Users", "users", <MailOutlined />),
-    getItem("Menu", "menu", <MailOutlined />),
-    getItem("Tables", "tables", <MailOutlined />),
+    getItem("Employees", "users", <UserOutlined />),
+    getItem("Menu", "menu", <BookOutlined />),
+    getItem("Tables", "tables", <BoxPlotOutlined />),
   ];
   return (
     <div className="Manager">
