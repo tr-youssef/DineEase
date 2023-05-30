@@ -9,3 +9,8 @@
 # DineEase Demo Link :
 
 https://dineease-client.vercel.app/
+
+# DineEase Video :
+
+https://github.com/tr-youssef/DineEase/assets/58892168/dc5b3ed6-dd23-43e2-bd7f-723227494c37
+
